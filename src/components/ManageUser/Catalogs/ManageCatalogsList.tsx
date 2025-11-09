@@ -17,7 +17,7 @@ export default function ManageCatalogsList() {
     const [searchTerm, setSearchTerm] = React.useState('');
     const [currentPage, setCurrentPage] = React.useState(1);
 
-    const { data: getCatalogs, isLoading: isLoadingGetCatalogs, isFetching } = GetAdminAllCatalogsApi(id, '');
+    const { data: getCatalogs, isLoading: isLoadingGetCatalogs, isFetching } = GetAdminAllCatalogsApi(id || '', '');
 
     const PAGE_SIZE = 25
     React.useEffect(() => {

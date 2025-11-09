@@ -146,7 +146,7 @@ export default function EditSongDetails({ userData, song, getReleaseInfo, refetc
                                 >
                                     Edit songs Details
                                 </Dialog.Title>
-                                <form >
+                                <form onSubmit={onSubmit}>
                                     <div className="mt-2">
                                         
 
@@ -391,7 +391,6 @@ export default function EditSongDetails({ userData, song, getReleaseInfo, refetc
                                         </button>
                                         <button
                                             type="submit"
-                                            onClick={handleSubmit(onSubmit)}
                                             disabled={isLoadingSongsPost}
                                             className="px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
                                         >

@@ -4,18 +4,49 @@ import { GetTokenValidateApi } from '../../api/authentication';
 import * as React from 'react';
 import { BounceLoader } from 'react-spinners';
 
-const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-    const token = React.useMemo(() => localStorage.getItem('token'), []);
+interface PublicRouteProps {
+    children: React.ReactNode;
+}
+
+const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [isVerified, setIsVerified] = useState(false);
     const navigate = useNavigate();
-    const [isVerified, setIsVerified] = useState(true);
-    const { data: GetTokenValidate, isLoading } = GetTokenValidateApi(navigate, setIsVerified, token);
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                setIsLoading(false);
+                return;
+            }
+
+            try {
+                const response = await GetTokenValidateApi(navigate, setIsVerified, token);
+                if (response?.data?.data?.users_id) {
+                    setIsVerified(true);
+                }
+            } catch (error) {
+                console.error('Token validation error:', error);
+                setIsVerified(false);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        validateToken();
+    }, [token, navigate]);
 
     if (isLoading) {
-        return
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <BounceLoader color="#36d7b7" />
+            </div>
+        );
     }
 
-    if (token && GetTokenValidate?.data?.data?.users_id) {
-        return <Navigate to="/" />;
+    if (token && isVerified) {
+        return <Navigate to="/" replace />;
     }
 
     return <>{children}</>;

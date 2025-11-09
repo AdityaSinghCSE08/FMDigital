@@ -34,7 +34,7 @@ const DashboardPage: React.FC = () => {
     React.useEffect(() => {
        
     // If there's a tab in the URL, use it; otherwise default to 'overview'
-    const validTab = tabs.some(tab => tab.id === tabFromUrl) ? tabFromUrl : 'overview';
+    const validTab = (tabFromUrl && tabs.some(tab => tab.id === tabFromUrl)) ? tabFromUrl : 'overview';
     setActiveTab(validTab);
     console.log("ValidTab:",validTab)
     console.log("active tab:",activeTab)

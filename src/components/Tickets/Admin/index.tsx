@@ -12,7 +12,7 @@ export default function AdminTicketsIndex() {
   const navigate = useNavigate();
   const [userId, setUserId] = React.useState("");
   const [statusId, setStatusId] = React.useState("");
-  const [tickets, settickets] = React.useState([]);
+  const [tickets, settickets] = React.useState<typeof stubTickets>([]);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedTicket, setSelectedTicket] = React.useState<any>(null);
   const [aiResponse, setAiResponse] = React.useState("");

@@ -13,7 +13,17 @@ export default function UserTicketsIndex() {
   const navigate = useNavigate();
   const [userId, setUserId] = React.useState("");
   const [statusId, setStatusId] = React.useState("");
-  const [tickets, settickets] = React.useState([]);
+  type TicketType = {
+    ticket_id: number;
+    users_id: number;
+    reason: string;
+    discreption: string;
+    ticketDocument: string;
+    Status: number;
+    created_at: string;
+    users: { fname: string; lname: string; email: string; }[];
+  };
+  const [tickets, settickets] = React.useState<TicketType[]>([]);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedTicket, setSelectedTicket] = React.useState<any>(null);
   const [aiResponse, setAiResponse] = React.useState("");

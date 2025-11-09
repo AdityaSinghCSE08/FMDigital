@@ -57,41 +57,19 @@ export default function ReleaseInfo() {
         setSelectedItems(item);
     };
 
-    var today = new Date();
-    var targetDate = new Date(today);
-    targetDate.setDate(today.getDate() + 6); // Adding 5 days
-
-    function isPastTargetDate() {
-        var currentDate = new Date();
-        return currentDate >= targetDate;
-    }
-    if (isPastTargetDate()) {
-        // Perform your action or hide the content here
-        let month: any = targetDate.getMonth() + 1;
-        let year = targetDate.getUTCFullYear() - 0;
-        let tdate: any = targetDate.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (tdate < 10) {
-            tdate = "0" + tdate;
-        }
-        var maxDate = year + "-" + month + "-" + tdate;
-
-    } else {
-        // The target date has not been reached yet
-        let month: any = targetDate.getMonth() + 1;
-        let year = targetDate.getUTCFullYear() - 0;
-        let tdate: any = targetDate.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (tdate < 10) {
-            tdate = "0" + tdate;
-        }
-        var maxDate1 = year + "-" + month + "-" + tdate;
-
-    }
+    // Calculate minimum date (6 days from today)
+    const today = new Date();
+    const targetDate = new Date(today);
+    targetDate.setDate(today.getDate() + 6);
+    
+    const formatDate = (date: Date) => {
+        const year = date.getUTCFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+    
+    const minReleaseDate = formatDate(targetDate);
 
     function toTitleCase(str: string) {
         return str.replace(
@@ -239,10 +217,9 @@ export default function ReleaseInfo() {
                                 <Label text="Release Date" htmlFor="grid-ReleaseDate" required={true} />
                                 <input
                                     type="date"
-                                    name="ReleaseDate"
                                     placeholder="Enter Release Date"
                                     onKeyDown={(e) => e.preventDefault()}
-                                    min={maxDate || maxDate1}
+                                    min={minReleaseDate}
                                     className={`border-2 mt-2 px-3 py-2 placeholder-gray-400 text-gray-700 bg-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full transition ease-in-out duration-150 ${errors?.ReleaseDate ? 'border-red-500' : 'border-gray-300'
                                         }`}
                                     {...register("ReleaseDate", {

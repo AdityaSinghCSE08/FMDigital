@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface CircularButtonProps {
     text: string;
-    onClick: () => void;
+    onClick?: () => void;
     color?: 'blue' | 'customblue' | 'purple' | 'green' | 'yellow' | 'white' | 'none';
     textColor?: string;
     className?: string;
@@ -10,7 +10,7 @@ interface CircularButtonProps {
 
 const CircularButton: React.FC<CircularButtonProps> = ({
     text,
-    onClick,
+    onClick = () => {},
     color = 'blue',
     textColor,
     className = ''

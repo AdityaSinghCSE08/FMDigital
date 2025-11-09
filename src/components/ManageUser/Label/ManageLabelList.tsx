@@ -15,7 +15,7 @@ export default function ManageLabelList() {
     const [userId, setUserId] = React.useState('');
     const [currentPage, setCurrentPage] = React.useState(1);
 
-    const { data: allUsersData, isLoading, isFetching } = GetAllUsersWithFiltersDataApi(id);
+    const { data: allUsersData, isLoading, isFetching } = GetAllUsersWithFiltersDataApi(id || '');
 
     console.log(allUsersData?.data?.data)
 
