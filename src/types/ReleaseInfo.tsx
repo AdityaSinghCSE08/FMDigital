@@ -1,12 +1,12 @@
 export type ReleaseInfoDto = {
     ReleaseType: string
-    ReleaseTitle: Date
-    PrimaryArtist: Date
+    ReleaseTitle: string
+    PrimaryArtist: string
     FeaturingArtist: string
     Genre: string
     SubGenre: string
-    LabelName: number
-    ReleaseDate: Date
+    LabelName: string
+    ReleaseDate: string
     PLine: string
     CLine: string
     UPCEAN: string
