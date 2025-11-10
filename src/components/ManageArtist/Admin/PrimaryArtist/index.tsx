@@ -21,7 +21,7 @@ const AdminPrimaryArtistIndex = () => {
 
     const { data: allUsersData } = GetAllUsersDataApi();
 
-    const PAGE_SIZE = 25
+    const PAGE_SIZE = 10
     React.useEffect(() => {
         if (GetPrimaryArtist) {
             setCatalogs(GetPrimaryArtist.data.data);

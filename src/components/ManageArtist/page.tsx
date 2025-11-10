@@ -10,7 +10,7 @@ export default function ManageArtistPage() {
 
     return (
         <>
-            {userType !== "User" ? <AdminManageArtistIndex /> : <ManageArtist />}
+            {userType !== "user" ? <AdminManageArtistIndex /> : <ManageArtist />}
         </>
     )
 }

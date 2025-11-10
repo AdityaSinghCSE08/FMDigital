@@ -134,7 +134,7 @@ const Payouts = () => {
             <div
               className={`bg-white rounded-none ${
                 payoutData.length > 0 ? "shadow" : ""
-              } overflow-hidden w-3/4`}
+              } overflow-hidden w-3/5`}
             >
               {/* Header (fixed, not scrollable) */}
               <table className="w-full table-fixed">
@@ -146,7 +146,7 @@ const Payouts = () => {
                     {/* <th className="w-28 px-4 py-3 text-left text-sm font-medium">
                       Amount
                     </th> */}
-                    <th className="w-44 px-4 py-3 text-left text-sm font-medium">
+                    <th className="w-40 px-2 py-3 text-left text-sm font-medium">
                       Date
                     </th>
                     {/* <th className="w-48 px-4 py-3 text-left text-sm font-medium">
@@ -177,7 +177,7 @@ const Payouts = () => {
                         {/* <td className="w-28 px-4 py-3 text-sm text-gray-700 whitespace-nowrap">
                           $ {item.amount}.00
                         </td> */}
-                        <td className="w-44 px-4 py-3 text-sm text-gray-700">
+                        <td className="w-40 px-2 py-3 text-sm text-gray-700">
                           {item.date}
                         </td>
                         {/* <td className="w-48 px-4 py-3 text-sm text-gray-700">
