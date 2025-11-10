@@ -17,20 +17,41 @@ export default function FeatureArtist({ userData }: { userData: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const size = useResponsiveIconSize();
 
+  // Fetch existing featuring artists for validation
+  const { data: existingArtists, isLoading: isLoadingArtists } =
+    GetFeaturingArtistApi(userData?.users_id);
+
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     control,
     formState: { errors },
   } = useForm<FeatureArtistDto>();
 
+  // Function to check if artist name already exists
+  const checkDuplicateArtist = (artistName: string) => {
+    // Don't validate while loading or if no data
+    if (isLoadingArtists || !existingArtists?.data?.data) return false;
+
+    return existingArtists.data.data.some(
+      (artist: any) =>
+        artist.FeaturingArtist?.toLowerCase().trim() ===
+        artistName.toLowerCase().trim()
+    );
+  };
+
   function toTitleCase(str: string) {
     return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
     });
   }
+
+  // Reset form when modal closes
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    reset();
+  };
 
   //featuringArtisttPost Api Call
   const {
@@ -57,7 +78,7 @@ export default function FeatureArtist({ userData }: { userData: any }) {
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={() => setIsOpen(false)}
+          onClose={handleCloseModal}
         >
           <div className="min-h-screen px-4 text-center">
             <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -102,6 +123,13 @@ export default function FeatureArtist({ userData }: { userData: any }) {
                         control={control}
                         rules={{
                           required: "Featuring Artist Name is required.",
+                          validate: (value) => {
+                            if (!value) return true; // Let required rule handle empty values
+                            return (
+                              !checkDuplicateArtist(value) ||
+                              "A Featuring Artist with this name already exists. Please use a different name."
+                            );
+                          },
                         }}
                         render={({ field }) => (
                           <input
@@ -165,7 +193,7 @@ export default function FeatureArtist({ userData }: { userData: any }) {
                     <button
                       type="button"
                       className="px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                      onClick={() => setIsOpen(false)}
+                      onClick={handleCloseModal}
                     >
                       Close
                     </button>

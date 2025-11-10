@@ -4,34 +4,60 @@ import { Fragment, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useResponsiveIconSize from "../../../hooks/useResponsiveIconSize";
 import Label from "../../../ui/Label";
-import InputField from "../../../ui/InputField";
+
 import { Controller, useForm } from "react-hook-form";
 import { PrimaryArtistDto } from "../../../types/ReleaseInfo";
-import { PrimaryArtisttPostApi } from "../../../api/releaseInfo";
+import {
+  PrimaryArtisttPostApi,
+  GetPrimaryArtistApi,
+} from "../../../api/releaseInfo";
 import { BeatLoader } from "react-spinners";
+import InputField from "../../../ui/InputField";
 
 export default function PrimaryArtist({ userData }: { userData: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const size = useResponsiveIconSize();
 
+  // Fetch existing primary artists for validation
+  const { data: existingArtists, isLoading: isLoadingArtists } =
+    GetPrimaryArtistApi(userData?.users_id);
+
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     control,
     formState: { errors },
   } = useForm<PrimaryArtistDto>();
 
+  // Function to check if artist name already exists
+  const checkDuplicateArtist = (artistName: string) => {
+    // Don't validate while loading or if no data
+    if (isLoadingArtists || !existingArtists?.data?.data) return false;
+
+    return existingArtists.data.data.some(
+      (artist: any) =>
+        artist.PrimaryArtist?.toLowerCase().trim() ===
+        artistName.toLowerCase().trim()
+    );
+  };
+
+  // Reset form when modal closes
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    reset();
+  };
+
   function toTitleCase(str: string) {
     return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
     });
   }
 
-  //featuringArtisttPost Api Call
+  //PrimaryArtisttPost Api Call
   const { mutate: PrimaryArtisttPost, isLoading: isLoadingPrimaryArtisttPost } =
     PrimaryArtisttPostApi(setIsOpen);
+
   const onSubmit = handleSubmit(async (data: any) => {
     const newData: any = { ...data };
     newData.users_id = Number(userData?.users_id);
@@ -52,7 +78,7 @@ export default function PrimaryArtist({ userData }: { userData: any }) {
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={() => setIsOpen(false)}
+          onClose={handleCloseModal}
         >
           <div className="min-h-screen px-4 text-center">
             <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -95,7 +121,16 @@ export default function PrimaryArtist({ userData }: { userData: any }) {
                       <Controller
                         name="PrimaryArtist"
                         control={control}
-                        rules={{ required: "Primary Artist Name is required." }}
+                        rules={{
+                          required: "Primary Artist Name is required.",
+                          validate: (value) => {
+                            if (!value) return true; // Let required rule handle empty values
+                            return (
+                              !checkDuplicateArtist(value) ||
+                              "A Primary Artist with this name already exists. Please use a different name."
+                            );
+                          },
+                        }}
                         render={({ field }) => (
                           <input
                             type="text"
@@ -160,7 +195,7 @@ export default function PrimaryArtist({ userData }: { userData: any }) {
                     <button
                       type="button"
                       className="px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                      onClick={() => setIsOpen(false)}
+                      onClick={handleCloseModal}
                     >
                       Close
                     </button>
