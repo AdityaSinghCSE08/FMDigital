@@ -46,7 +46,7 @@ export default function AdminProfileLinkingIndex() {
     }, []);
 
 
-    const PAGE_SIZE = 25
+    const PAGE_SIZE = 7
     React.useEffect(() => {
         if (profilelinkings) {
             setCatalogs(profilelinkings.data.data);
@@ -162,10 +162,10 @@ export default function AdminProfileLinkingIndex() {
                                                 <th scope="col" className="px-6 py-4 text-left text-xs text-black font-semibold uppercase ">
                                                     Email
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs text-black font-semibold uppercase ">
+                                                <th scope="col" className="px-6 py-3 text-left text-xs text-black font-semibold uppercase max-w-xs">
                                                     Release Title
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs text-black font-semibold uppercase ">
+                                                <th scope="col" className="px-6 py-3 text-left text-xs text-black font-semibold uppercase max-w-xs">
                                                     Audio Title
                                                 </th>
                                                 <th scope="col" className="px-6 py-3 text-left text-xs text-black font-semibold uppercase ">

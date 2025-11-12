@@ -11,7 +11,7 @@ export default function ProfileLinkingPage() {
 
     return (
         <>
-            {userType !== "User" ? <AdminProfileLinkingIndex /> : <ProfileLinking />}
+            {userType !== "user" ? <AdminProfileLinkingIndex /> : <ProfileLinking />}
         </>
     )
 }

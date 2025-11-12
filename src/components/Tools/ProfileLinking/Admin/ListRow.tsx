@@ -85,10 +85,10 @@ export default function ListRow({ link, index, currentPage, PAGE_SIZE }: { link:
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 cursor-pointer">
                     {link?.users[0]?.email || '--'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <td className="px-6 py-4 text-sm text-gray-700 max-w-xs break-words">
                     {link.Selectrelease || '--'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <td className="px-6 py-4 text-sm text-gray-700 max-w-xs break-words">
                     {link.SelectAudio || '--'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">

@@ -10,7 +10,7 @@ export default function LabelPage() {
 
     return (
         <>
-            {userType !== "User"  ? <AdminLabelIndex /> : <Label />}
+            {userType !== "user"  ? <AdminLabelIndex /> : <Label />}
         </>
     )
 }
