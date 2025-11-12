@@ -24,7 +24,7 @@ onSuccess: (res) => {
                 
                 // Set user type from response
                 //const userType = res.data?.data?.userType || 'admin'; // Default to admin if not specified
-                const userType = res.data?.data?.userType || 'admin'; // Default to admin if not specified
+                const userType = res.data?.data?.userType || 'user'; // Default to admin if not specified
                 setUserType(userType);
                 localStorage.setItem("userType", userType);
                 
