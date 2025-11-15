@@ -35,6 +35,7 @@ import HistoryIndex from "./components/Financial/History/HistoryIndex";
 import DashboardPage from "./components/Dashboard";
 import UserAudioCatalog from "./components/Catalogs/User/UserAudioCatalog";
 import UserVideoCatalog from "./components/Catalogs/User/UserVideoCatalog";
+import UserRejectedSong from "./components/Catalogs/User/UserRejectedSong";
 import MusicReleaseCards from "./components/CreateRelease/MusicReleaseCards";
 import Index from "./components/Home";
 
@@ -66,6 +67,7 @@ function App() {
               <Route path="CatalogsAudio" element={<AdminCatalogsAudioList />} />
               <Route path="user/catalog/audio" element={<UserAudioCatalog />} />
               <Route path="user/catalog/video" element={<UserVideoCatalog />} />
+              <Route path="user/catalog/audio/:id" element={<UserRejectedSong />} />
               <Route path="Submission" element={<Submission />} />
               <Route path="Tools/YoutubeClaims" element={<YouTubeClaimsPage />} />
               <Route path="Tools/ProfileLinking" element={<ProfileLinkingPage />} />

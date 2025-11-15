@@ -11,16 +11,16 @@ const UserAudioCatalog = () => {
   const [filterAll, setFilterAll] = React.useState('All');
 
   const audioData = [
-    { id: 1, title: 'Baalam', artist: 'Sonu Bandiwal', genre: 'Indian', label: 'FM Digital', tracks: 1, date: '2025-04-20' },
-    { id: 2, title: 'Call Je Hove', artist: 'Ajay', genre: 'Indie', label: 'FM Digital', tracks: 1, date: '2024-11-04' },
-    { id: 3, title: 'Aij Kar', artist: 'Ajay', genre: 'Indian', label: 'FM FEEL music', tracks: 1, date: '2024-09-28' },
-    { id: 4, title: 'Chand Mera', artist: 'Sonu Bandiwal', genre: 'Folk', label: 'FM FEEL music', tracks: 1, date: '2024-04-15' },
-    { id: 5, title: 'Pagal Si Ladki', artist: 'Alok', genre: 'R & B', label: 'FM FEEL music', tracks: 1, date: '2023-01-07' },
-    { id: 6, title: 'Bangla Bhadu', artist: 'Satpanth ji', genre: 'Electronic', label: 'FM FEEL music', tracks: 1, date: '2022-11-12' },
-    { id: 7, title: 'Chunnea', artist: 'Ajit Datt', genre: 'Folk', label: 'FM FEEL music', tracks: 1, date: '2022-11-01' },
-    { id: 8, title: 'Ganpati Bappa Ki Sawar', artist: 'Chandra Srivam', genre: 'Devotional', label: 'FM Digital', tracks: 1, date: '2022-08-30' },
-    { id: 9, title: 'Violent Jatt', artist: 'Ajay', genre: 'Folk', label: 'FM Digital', tracks: 1, date: '2021-11-18' },
-    { id: 10, title: 'Pyaar Nai', artist: 'Ajay', genre: 'Folk', label: 'FM Digital', tracks: 1, date: '2021-02-27' },
+    { id: 1, title: 'Baalam', artist: 'Sonu Bandiwal', genre: 'Indian', label: 'FM Digital', tracks: 1, date: '2025-04-20',status:0 },
+    { id: 2, title: 'Call Je Hove', artist: 'Ajay', genre: 'Indie', label: 'FM Digital', tracks: 1, date: '2024-11-04',status:0 },
+    { id: 3, title: 'Aij Kar', artist: 'Ajay', genre: 'Indian', label: 'FM FEEL music', tracks: 1, date: '2024-09-28',status:1 },
+    { id: 4, title: 'Chand Mera', artist: 'Sonu Bandiwal', genre: 'Folk', label: 'FM FEEL music', tracks: 1, date: '2024-04-15',status:0 },
+    { id: 5, title: 'Pagal Si Ladki', artist: 'Alok', genre: 'R & B', label: 'FM FEEL music', tracks: 1, date: '2023-01-07',status:0 },
+    { id: 6, title: 'Bangla Bhadu', artist: 'Satpanth ji', genre: 'Electronic', label: 'FM FEEL music', tracks: 1, date: '2022-11-12',status:1 },
+    { id: 7, title: 'Chunnea', artist: 'Ajit Datt', genre: 'Folk', label: 'FM FEEL music', tracks: 1, date: '2022-11-01' ,status:0},
+    { id: 8, title: 'Ganpati Bappa Ki Sawar', artist: 'Chandra Srivam', genre: 'Devotional', label: 'FM Digital', tracks: 1, date: '2022-08-30',status:0 },
+    { id: 9, title: 'Violent Jatt', artist: 'Ajay', genre: 'Folk', label: 'FM Digital', tracks: 1, date: '2021-11-18',status:0 },
+    { id: 10, title: 'Pyaar Nai', artist: 'Ajay', genre: 'Folk', label: 'FM Digital', tracks: 1, date: '2021-02-27',status:0 },
   ];
 
   return (
@@ -87,7 +87,22 @@ const UserAudioCatalog = () => {
             </thead>
             <tbody>
               {audioData.map((item, index) => (
-                <tr key={item.id} className="border-b hover:bg-gray-50">
+                <tr 
+                  key={item.id} 
+                  className="border-b hover:bg-gray-50 cursor-pointer"
+                  onClick={() => navigate(`/user/catalog/audio/${item.id}`, {
+                    state: {
+                      id: item.id,
+                      title: item.title || '',
+                      artist: item.artist || '',
+                      genre: item.genre || '',
+                      label: item.label || '',
+                      tracks: item.tracks || '',
+                      date: item.date || '',
+                      status: item.status !== undefined ? item.status : 1
+                    }
+                  })}
+                >
                   <td className="px-4 py-3 text-sm text-gray-600">{index + 1}</td>
                   <td className="px-4 py-3">
                     <div className="w-6 h-6 bg-white rounded-full border-2 border-green-500 flex items-center justify-center">
@@ -110,7 +125,10 @@ const UserAudioCatalog = () => {
                   <td className="px-4 py-3 text-sm text-gray-600">{item.tracks}</td>
                   <td className="px-4 py-3 text-sm text-gray-600">{item.date}</td>
                   <td className="px-4 py-3">
-                    <button className="bg-cyan-400 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-sm font-medium">
+                    <button 
+                      onClick={(e) => e.stopPropagation()}
+                      className="bg-cyan-400 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-sm font-medium"
+                    >
                       Stores
                     </button>
                   </td>
