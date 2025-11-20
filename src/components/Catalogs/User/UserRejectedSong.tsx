@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { X, Check } from 'lucide-react';
-
 const UserRejectedSong = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -15,6 +14,8 @@ const UserRejectedSong = () => {
   const statusValue = rowData.status !== undefined ? rowData.status : 1;
   const status = typeof statusValue === 'string' ? parseInt(statusValue) : statusValue;
   const isApproved = status === 0;
+  const approvedBadgeSrc = `${process.env.PUBLIC_URL}/images/catalog/${encodeURIComponent('Approved Button.png')}`;
+  const pendingBadgeSrc = `${process.env.PUBLIC_URL}/images/catalog/${encodeURIComponent('Pending button.png')}`;
   
   // Debug log to verify status (can remove later)
   console.log('Row Data:', rowData);
@@ -177,9 +178,11 @@ const UserRejectedSong = () => {
                     <td className="px-4 py-3 text-sm text-gray-600">{track.genre || '-'}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{track.catalogueNumber || '-'}</td>
                     <td className="px-4 py-3">
-                      <span className={`${isApproved ? 'text-green-600 border-2 border-green-500 px-2 py-2 rounded-md' : 'text-red-600 border-2 border-red-500 px-1 py-1 rounded-md'}  `}>
-                        {track.status}
-                      </span>
+                      <img
+                        src={isApproved ? approvedBadgeSrc : pendingBadgeSrc}
+                        alt={track.status}
+                        className="h-8 w-auto"
+                      />
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">{track.majorPlatforms || '-'}</td>
                   </tr>

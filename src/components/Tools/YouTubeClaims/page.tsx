@@ -10,7 +10,7 @@ export default function YouTubeClaimsPage() {
 
     return (
         <>
-            {userType !== "User"  ? <AdminYouTubeClaimsIndex /> : <YouTubeClaims />}
+            {userType !== "user"  ? <AdminYouTubeClaimsIndex /> : <YouTubeClaims />}
         </>
     )
 }

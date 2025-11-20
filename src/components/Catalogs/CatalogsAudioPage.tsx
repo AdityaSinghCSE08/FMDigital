@@ -12,7 +12,7 @@ export default function CatalogsPage(){
     
     return(
         <>
-            {userType !== "User"  ? <AdminCatalogsAudioList /> : <Catalogs />}
+            {userType !== "user"  ? <AdminCatalogsAudioList /> : <Catalogs />}
         </>
     )
 }
