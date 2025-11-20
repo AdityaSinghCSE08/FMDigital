@@ -14,8 +14,40 @@ const UserRejectedSong = () => {
   const statusValue = rowData.status !== undefined ? rowData.status : 1;
   const status = typeof statusValue === 'string' ? parseInt(statusValue) : statusValue;
   const isApproved = status === 0;
-  const approvedBadgeSrc = `${process.env.PUBLIC_URL}/images/catalog/${encodeURIComponent('Approved Button.png')}`;
-  const pendingBadgeSrc = `${process.env.PUBLIC_URL}/images/catalog/${encodeURIComponent('Pending button.png')}`;
+  const publicImageBase = `${process.env.PUBLIC_URL}/images`;
+  const approvedBadgeSrc = `${publicImageBase}/catalog/${encodeURIComponent('Approved Button.png')}`;
+  const pendingBadgeSrc = `${publicImageBase}/catalog/${encodeURIComponent('Pending button.png')}`;
+
+  const platformIconMap: Record<string, { label: string; src: string }> = {
+    spotify: { label: 'Spotify', src: `${publicImageBase}/achievement/Spotify.png` },
+    gaana: { label: 'Gaana', src: `${publicImageBase}/ganna.png` },
+    ganna: { label: 'Gaana', src: `${publicImageBase}/ganna.png` }, // safeguard for spelling
+    soundcloud: { label: 'SoundCloud', src: `${publicImageBase}/soundcloud.png` },
+    youtubemusic: { label: 'YouTube Music', src: `${publicImageBase}/youtubemusic.png` },
+    apple: { label: 'Apple Music', src: `${publicImageBase}/achievement/AppleMusic.png` },
+    applemusic: { label: 'Apple Music', src: `${publicImageBase}/achievement/AppleMusic.png` },
+    wynk: { label: 'Wynk', src: `${publicImageBase}/wynk.png` },
+    saavn: { label: 'Saavn', src: `${publicImageBase}/achievement/JioSavan.png` },
+    anghami: { label: 'Anghami', src: `${publicImageBase}/anghami.png` },
+  };
+
+  const defaultMajorPlatforms = ['Spotify', 'Saavn','Apple Music'];
+
+  const normalizeKey = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normalizeMajorPlatforms = (value: unknown) => {
+    if (Array.isArray(value)) {
+      return value.filter((platform) => typeof platform === 'string' && platform.trim().length).map((platform) => platform.trim());
+    }
+
+    if (typeof value === 'string') {
+      return value
+        .split(',')
+        .map((platform) => platform.trim())
+        .filter(Boolean);
+    }
+
+    return [];
+  };
   
   // Debug log to verify status (can remove later)
   console.log('Row Data:', rowData);
@@ -54,7 +86,7 @@ const UserRejectedSong = () => {
         genre: rowData.genre || '',
         catalogueNumber: '', // Not available in row data
         status: isApproved ? 'Approved' : 'Rejected',
-        majorPlatforms: ''
+        majorPlatforms: normalizeMajorPlatforms(rowData?.majorPlatforms)
       }
     ]
   };
@@ -184,7 +216,42 @@ const UserRejectedSong = () => {
                         className="h-8 w-auto"
                       />
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-600">{track.majorPlatforms || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {isApproved ? (
+                        <div className="flex flex-col gap-2">
+                          <div className="flex flex-wrap items-center gap-0">
+                            {(track.majorPlatforms && track.majorPlatforms.length ? track.majorPlatforms : defaultMajorPlatforms).map((platform) => {
+                              const key = normalizeKey(platform);
+                              const iconInfo = platformIconMap[key];
+
+                              if (!iconInfo) {
+                                return (
+                                  <span key={`${track.no}-${platform}`} className="px-2 py-1 text-xs bg-gray-100 rounded-full text-gray-600 border">
+                                    {platform}
+                                  </span>
+                                );
+                              }
+
+                              return (
+                                <div
+                                  key={`${track.no}-${platform}`}
+                                  className="  flex items-center justify-center"
+                                  title={iconInfo.label}
+                                >
+                                  <img src={iconInfo.src} alt={iconInfo.label} className="w-5 h-5 object-contain" />
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <p className="text-[11px] text-gray-500 flex items-center gap-1">
+                            <span className="text-gray-400 text-base leading-none">ℹ</span>
+                            Some stores do not provide direct links. Visit the store and search manually.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="h-6" />
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
