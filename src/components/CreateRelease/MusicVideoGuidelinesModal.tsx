@@ -6,8 +6,8 @@ interface MusicVideoGuidelinesModalProps {
 
 const MusicVideoGuidelinesModal: React.FC<MusicVideoGuidelinesModalProps> = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" onClick={onClose}>
+      <div className="bg-white rounded-lg shadow-xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center border-b pb-4 mb-4">
           <h2 className="text-2xl font-bold text-gray-800">MUSIC VIDEO GUIDELINES/SPECIFICATIONS</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
@@ -47,9 +47,6 @@ const MusicVideoGuidelinesModal: React.FC<MusicVideoGuidelinesModalProps> = ({ o
             </li>
             <li><span className="font-semibold">Sound Quality:</span> Codec – PCM Sampling frequency, 48 kHz Sample size, 16 bits Audio bitrate, ~1536 kb/s, 2 Channels (stereo)</li>
           </ul>
-        </div>
-        <div className="text-right mt-6">
-          <button onClick={onClose} className="bg-gray-800 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition-colors">Close</button>
         </div>
       </div>
     </div>

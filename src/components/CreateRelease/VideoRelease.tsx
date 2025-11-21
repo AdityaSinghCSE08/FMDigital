@@ -3,6 +3,7 @@ import { CalendarClock } from 'lucide-react';
 import MusicVideoGuidelinesModal from './MusicVideoGuidelinesModal';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 const VideoPlatformForm = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -202,7 +203,9 @@ const VideoPlatformForm = () => {
               </div>
               {thumbnail && <p className="text-green-500 text-xs mt-1">{thumbnail.name}</p>}
               {thumbnailError && <p className="text-red-500 text-xs mt-1">{thumbnailError}</p>}
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="text-cyan-500 text-sm mt-3 inline-block">Music Video Guidelines</a>
+              <div className="text-center mt-3">
+                <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="text-cyan-500 text-sm">Music Video Guidelines</a>
+              </div>
             </div>
 
             {isModalOpen && <MusicVideoGuidelinesModal onClose={() => setIsModalOpen(false)} />}
@@ -371,23 +374,24 @@ const VideoPlatformForm = () => {
             </div>
 
             {/* Terms Checkbox */}
-            <div className="mt-4 flex items-center gap-2">
+            <div className="mt-4 flex items-center justify-center gap-2">
               <input
                 type="checkbox"
                 checked={agreeTerms}
                 onChange={(e) => setAgreeTerms(e.target.checked)}
                 className="w-4 h-4 accent-pink-500"
               />
-              <span className="text-sm text-gray-600 justify-content-center items-center margin-auto flex">
+              <span className="text-sm text-gray-600">
                 I understand and agree to the{' '}
                 <a href="#" className="text-cyan-500 underline">FM Digital Distribution Terms & Privacy Policy.</a>
               </span>
             </div>
 
             {/* Submit Button */}
-            <div className="mt-0 text-center">
-              <button className="bg-gray-800 text-white px-8 py-2.5 rounded-md hover:bg-gray-700 transition-colors">
-                📄 Submit
+            <div className="mt-1 flex justify-center items-center">
+              <button className="bg-gray-800 text-white px-8 py-1 rounded-md hover:bg-gray-700 transition-colors flex items-center gap-2">
+                <SaveOutlinedIcon className="text-grey" />
+                Submit
               </button>
             </div>
           </div>
