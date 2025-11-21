@@ -1,6 +1,8 @@
 import * as React from "react";
-import { Calendar } from 'lucide-react';
+import { CalendarClock } from 'lucide-react';
 import MusicVideoGuidelinesModal from './MusicVideoGuidelinesModal';
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const VideoPlatformForm = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -66,6 +68,7 @@ const VideoPlatformForm = () => {
   const [actressName, setActressName] = React.useState('');
   const [actorNameError, setActorNameError] = React.useState('');
   const [actressNameError, setActressNameError] = React.useState('');
+  const [releaseDate, setReleaseDate] = React.useState<Date | null>(null);
 
   const handleCapitalizedCaseValidation = (value: string, fieldName: string) => {
     const capitalizedCaseRegex = /^[A-Z][a-z]*(?:\s[A-Z][a-z]*)*$/;
@@ -238,19 +241,22 @@ const VideoPlatformForm = () => {
                     placeholder="Make Sure The File/transfer Is Unlocked."
                     className="w-full px-1 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Preferred sites : wetransfer, Dropbox, GoogleDrive, Formsmash</p>
+                  <p className="text-xs text-gray-500 mt-1 text-center">Preferred sites : wetransfer, Dropbox, GoogleDrive, Formsmash</p>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-700">
                     Release date<span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Select release date"
-                      className="w-full px-1 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    <CalendarClock className="absolute left-3 top-2 w-5 h-5 text-gray-400 z-10 pointer-events-none" />
+                    <DatePicker
+                      selected={releaseDate}
+                      onChange={(date: Date | null) => setReleaseDate(date)}
+                      placeholderText="Select release date"
+                      dateFormat="MM/dd/yyyy"
+                      className="w-full pl-10 pr-1 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      wrapperClassName="w-full"
                     />
-                    <Calendar className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
               </div>
