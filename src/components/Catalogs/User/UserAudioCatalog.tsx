@@ -29,7 +29,7 @@ const UserAudioCatalog = () => {
         {/* Header */}
         <div className=" text-white text-center  rounded-t-lg flex justify-between items-center mb-1">
           {/* <h1 className="text-xl font-semibold">Audio Catalog</h1> */}
-          <div className="bg-indigo-700 w-[50%] px-6 py-1">
+          <div className="bg-indigo-700 w-[50%] px-6 py-1 rounded">
             <div className="flex items-start">
               <h1 className="text-xl font-semibold">Audio Catalog</h1>
             </div>
@@ -69,7 +69,7 @@ const UserAudioCatalog = () => {
         </div>
 
         {/* Table */}
-        <div className="bg-white overflow-x-auto">
+        <div className="bg-white overflow-x-auto rounded-lg border border-gray-200">
           <table className="w-full table-fixed">
             <thead>
               <tr className="bg-gray-100 border-b text-xs text-gray-600 uppercase">
@@ -118,16 +118,16 @@ const UserAudioCatalog = () => {
                       />
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-700">{item.title}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{item.artist}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{item.genre}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{item.label}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{item.tracks}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{item.date}</td>
+                  <td className="px-4 py-3 text-xs text-gray-700">{item.title}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600">{item.artist}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600">{item.genre}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600">{item.label}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600">{item.tracks}</td>
+                  <td className="px-4 py-3 text-xs text-gray-600">{item.date}</td>
                   <td className="px-4 py-3">
                     <button 
                       onClick={(e) => e.stopPropagation()}
-                      className="bg-cyan-400 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-sm font-medium"
+                      className="bg-cyan-400 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-xs font-medium"
                     >
                       Stores
                     </button>
@@ -140,11 +140,11 @@ const UserAudioCatalog = () => {
 
         {/* Pagination */}
         <div className="bg-white px-6 py-4 rounded-b-lg flex justify-end items-center gap-2">
-          <button className="w-8 h-8 bg-gray-300 hover:bg-gray-400 rounded flex items-center justify-center text-gray-700">
+          <button className="w-6 h-6 bg-gray-300 hover:bg-gray-400 rounded flex items-center justify-center text-gray-700">
             <FiChevronLeft color="white" />
           </button>
           <span className="text-sm text-gray-600">Page 1</span>
-          <button className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded flex items-center justify-center text-white">
+          <button className="w-6 h-6 bg-gray-800 hover:bg-gray-900 rounded flex items-center justify-center text-white">
            <FiChevronRight color="white" />
           </button>
         </div>

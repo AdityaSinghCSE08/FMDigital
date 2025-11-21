@@ -98,7 +98,7 @@ const UserRejectedSong = () => {
         {/* <div className="bg-indigo-700 text-white px-6 py-3  mb-1">
           <h1 className="text-xl font-semibold">Audio Catalog</h1>
         </div> */}
-         <div className="bg-indigo-700 w-[50%] px-6 py-3 text-white mb-2">
+         <div className="bg-indigo-700 w-[50%] px-6 py-3 text-white mb-2 rounded">
             <div className="flex items-start">
               <h1 className="text-xl font-semibold">Audio Catalog</h1>
             </div>
@@ -106,7 +106,7 @@ const UserRejectedSong = () => {
 
         {/* Status Notice */}
         {isApproved ? (
-          <div className="bg-green-400 px-6 py-4 flex items-center gap-4 mb-1">
+          <div className="bg-green-400 px-6 py-4 flex items-center gap-4 mb-1 rounded">
             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
               <Check className="w-5 h-5 text-green-700 stroke-[3]" />
             </div>
@@ -244,8 +244,10 @@ const UserRejectedSong = () => {
                             })}
                           </div>
                           <p className="text-[11px] text-gray-500 flex items-center gap-1">
-                            <span className="text-gray-400 text-base leading-none">ℹ</span>
-                            Some stores do not provide direct links. Visit the store and search manually.
+                            <span className="text-gray-600 text-base leading-none pl-1"> <div className="w-3 h-3  flex items-center justify-center rounded-full border border-gray-400">
+                            <span className="text-gray-400 text-[9px] leading-[5px]">i</span>
+    </div></span>
+                            Some stores do not provide direct links. To find your album on a specific platform, simply visit the store and search for your album manually.
                           </p>
                         </div>
                       ) : (
