@@ -167,7 +167,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
 
     return (
         <>
-            <div className={`hidden sm:flex flex-col justify-between bg-neutral-800 ${isOpen ? 'sm:w-[16%] md:w-[16%] lg:w-[13%]' : 'w-[50px]'} py-2 pb-[40px] overflow-y-auto`}>
+            <div className={`hidden sm:flex flex-col justify-between bg-neutral-800 ${isOpen ? 'sm:w-[14%] md:w-[14%] lg:w-[11%]' : 'w-[44px]'} py-1 pb-[32px] overflow-y-auto`}>
                 <div>
                     <div className="flex flex-col gap-1">
                         {
@@ -182,10 +182,10 @@ export default function Index({ isOpen, setIsOpen }: props) {
                                         {
                                             r?.subRoutes ? (
                                                 <>
-                                                    <div className={`w-full items-center flex ${isOpen ? 'sm:gap-2 lg:gap-4 px-2 py-2' : 'justify-center px-4 py-4'} cursor-pointer hover:bg-zinc-500 ${isOpen ? "" : "mb-2"} `} onClick={(e) => handleClick(r, e)}>
+                                                    <div className={`w-full items-center flex ${isOpen ? 'sm:gap-2 lg:gap-4 px-2 py-1.5' : 'justify-center px-4 py-4'} cursor-pointer hover:bg-zinc-500 ${isOpen ? "" : "mb-2"} `} onClick={(e) => handleClick(r, e)}>
                                                         {r.icon}
                                                         <div className={`flex justify-between items-center ${isOpen ? "" : "hidden"} `} onClick={toggleDropdown}>
-                                                            <p className={`md:text-base text-white ${isOpen ? "" : "hidden"}`}>{r.name}</p>
+                                                            <p className={`md:text-sm text-white ${isOpen ? "" : "hidden"}`}>{r.name}</p>
                                                             <button className="text-icons text-xl ml-2">
                                                                 {openDropdownIndex === index ? <FiChevronUp color={'#ffffff'} /> : <FiChevronDown color={'#ffffff'} />}
                                                             </button>
@@ -196,9 +196,9 @@ export default function Index({ isOpen, setIsOpen }: props) {
                                                 <>
                                                     <NavLink to={r.path} key={r.path} className={({ isActive }) => isActive ? "bg-zinc-500 " : ""
                                                     } >
-                                                        <div className={`w-full items-center flex ${isOpen ? 'sm:gap-2 lg:gap-2 px-2 py-2' : 'justify-center px-2 py-2'} cursor-pointer hover:bg-zinc-500 ${isOpen ? "" : "mb-1"} `}>
+                                                        <div className={`w-full items-center flex ${isOpen ? 'sm:gap-2 lg:gap-2 px-2 py-1.5' : 'justify-center px-2 py-1.5'} cursor-pointer hover:bg-zinc-500 ${isOpen ? "" : "mb-1"} `}>
                                                             {r.icon}
-                                                            <p className={`md:text-base text-white ${isOpen ? "" : "hidden"}`}>{r.name}</p>
+                                                            <p className={`md:text-sm text-white ${isOpen ? "" : "hidden"}`}>{r.name}</p>
                                                         </div>
                                                     </NavLink>
                                                 </>
@@ -209,9 +209,9 @@ export default function Index({ isOpen, setIsOpen }: props) {
                                                 {r?.subRoutes?.map((s, i) => (
                                                     <NavLink to={s.path} key={s.path} className={({ isActive }) => isActive ? "bg-zinc-500 " : ""
                                                     } >
-                                                        <div className="w-full items-center flex md:gap-2 lg:gap-4 px-2 py-2 cursor-pointer hover:bg-zinc-500 ">
+                                                        <div className="w-full items-center flex md:gap-2 lg:gap-4 px-2 py-1.5 cursor-pointer hover:bg-zinc-500 ">
                                                             {s.icon}
-                                                            <p className={`md:text-sm text-white ${isOpen ? "" : "hidden"}`}>{s.name}</p>
+                                                            <p className={`md:text-xs text-white ${isOpen ? "" : "hidden"}`}>{s.name}</p>
                                                         </div>
                                                     </NavLink>
                                                 ))}
@@ -224,7 +224,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
                     </div>
                 </div>
 
-                <div className={` ${!isOpen ? 'hidden' : 'block'} bg-[#00CED1] h-14 flex flex-col items-center justify-center px-4 mt-8`}>
+                <div className={` ${!isOpen ? 'hidden' : 'block'} bg-[#00CED1] h-12 flex flex-col items-center justify-center px-4 mt-6`}>
                     <p className="text-white text-center mb-0">Connect with us</p>
                     <div className="flex gap-3 mt-2">
                         <FaLinkedin className="text-white cursor-pointer" onClick={() => handleUrlClick("https://www.linkedin.com/in/fm-digital-043a34244/")} />

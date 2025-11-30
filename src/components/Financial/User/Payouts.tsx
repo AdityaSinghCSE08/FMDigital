@@ -110,10 +110,16 @@ const Payouts = () => {
                 type="text"
                 // readonly
                 placeholder="Minimum Amount Should be 10$"
-                className="flex-1 min-w-[250px] px-4 py-3 text-sm text-gray-600 bg-white border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none"
+                className="flex-1 min-w-[250px] px-4 text-sm text-gray-600 bg-white border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none"
+                style={{ height: '34px' }}
               />
-              <button className="px-8 py-3 text-base font-bold text-white bg-green-600 hover:bg-green-700 rounded-md transition-colors whitespace-nowrap">
-                Withdraw
+              <button className="transition-opacity hover:opacity-90 cursor-pointer inline-block">
+                <img 
+                  src="/images/financial/Withdrawbutton.svg" 
+                  alt="Withdraw" 
+                  className="block"
+                  style={{ height: '34px', width: '150px' }}
+                />
               </button>
             </div>
           </div>
@@ -138,7 +144,15 @@ const Payouts = () => {
             >
               {/* Header (fixed, not scrollable) */}
               <table className="w-full table-fixed">
-                <thead className="bg-orange-400 text-white">
+                <thead 
+                  className="text-white relative"
+                  style={{
+                    backgroundImage: 'url(/images/financial/OrangesmallBand.svg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                >
                   <tr>
                     <th className="w-12 px-4 py-3 text-left text-sm font-medium">
                       No

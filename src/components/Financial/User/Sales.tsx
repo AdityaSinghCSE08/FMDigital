@@ -117,7 +117,16 @@ const Sales = () => {
             >
               {/* Header (fixed, not scrollable) */}
               <table className="w-full table-fixed">
-                <thead className="bg-orange-400 text-white">
+                {/* <thead className="bg-orange-400 text-white"> */}
+                <thead 
+                  className="text-white relative"
+                  style={{
+                    backgroundImage: 'url(/images/financial/OrangeBigBand.svg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                >
                   <tr>
                     <th className="w-12 px-4 py-3 text-left text-sm font-medium">
                       No

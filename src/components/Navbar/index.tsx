@@ -25,6 +25,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
     const navigate = useNavigate();
     const location = useLocation();
     const size = useResponsiveIconSize();
+    const compactIconSize = Math.max(size - 2, 12);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [openDropdownIndex, setOpenDropdownIndex] = React.useState<number | null>(null);
     const toggleMenu = () => {
@@ -180,13 +181,13 @@ export default function Index({ isOpen, setIsOpen }: props) {
     return (
         <>
             <div className="bg-neutral-800">
-                <div className="flex justify-between h-12 items-center px-4 sm:px-4">
+                <div className="flex justify-between h-10 items-center px-4 sm:px-4">
                     <div className="flex items-center gap-2">
                         {
-                            isOpen ? <MdClear color={'#ffffff'} size={size} className=" cursor-pointer" onClick={toggleMenu} /> : <MdOutlineMenu color={'#ffffff'} size={size} className=" cursor-pointer"  onClick={toggleMenu} />
+                            isOpen ? <MdClear color={'#ffffff'} size={compactIconSize} className=" cursor-pointer" onClick={toggleMenu} /> : <MdOutlineMenu color={'#ffffff'} size={compactIconSize} className=" cursor-pointer"  onClick={toggleMenu} />
                         }
                         {/* <MdOutlineMenu color={'#ffffff'} className=" cursor-pointer" size={size}  onClick={toggleMenu} /> */}
-                        <img src="/logo.svg" alt="FM Digital Logo" className="h-20 w-25 cursor-pointer" /> 
+                        <img src="/logo.svg" alt="FM Digital Logo" className="h-16 w-20 cursor-pointer" /> 
                     </div>
 
                     <div className="relative">
@@ -194,7 +195,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
                             className="flex items-center gap-2 cursor-pointer"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
-                            <FaUserCircle color={'#ffffff'} className="text-xl sm:text-2xl md:text-3xl" />
+                            <FaUserCircle color={'#ffffff'} className="text-lg sm:text-xl md:text-2xl" />
                             {/* {isMenuOpen ? 
                                 <FaChevronUp color="#ffffff" /> : 
                                 <FaChevronDown color="#ffffff" />
@@ -259,7 +260,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
                                         {
                                             subRoutes ? (
                                                 <>
-                                                    <div onClick={toggleDropdown} className='cursor-pointer flex items-center font-semibold text-gray-400 py-3 capitalize transition-all duration-300'>
+                                                    <div onClick={toggleDropdown} className='cursor-pointer flex items-center font-semibold text-gray-400 py-2.5 capitalize transition-all duration-300'>
                                                         <span className=' mr-2 grid place-items-center transition-all duration-300 '>{icon}</span>
                                                         {name}
                                                         {/* <span className='ml-2 mt-1'>
@@ -281,7 +282,7 @@ export default function Index({ isOpen, setIsOpen }: props) {
                                                 <>
                                                     <div onClick={toggleDropdown} className='cursor-pointer'>
                                                             <NavLink to={path} onClick={() => setIsOpen(!isOpen)}
-                                                            className={({ isActive }) => isActive ? 'flex items-center text-gray-100 py-3 capitalize transition-all duration-300 font-semibold' : 'flex items-center font-semibold text-gray-400 py-3 capitalize transition-all duration-300 '} end>
+                                                            className={({ isActive }) => isActive ? 'flex items-center text-gray-100 py-2.5 capitalize transition-all duration-300 font-semibold' : 'flex items-center font-semibold text-gray-400 py-2.5 capitalize transition-all duration-300 '} end>
                                                             <span className=' mr-2 grid place-items-center transition-all duration-300 '>{icon}</span>
                                                             {name}
                                                         </NavLink>
